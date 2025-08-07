@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import quotes from './quotes';
 import './App.css';
 
 function App() {
+  const [quote, setQuote] = useState(quotes[0]);
+
+  const getRandomQuote = () => {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    setQuote(quotes[randomIndex]);
+  };
+
+  const copyQuote = () => {
+    navigator.clipboard.writeText(quote);
+    alert("Quote copied to clipboard!");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Quote Generator</h1>
+      <p className="quote">{quote}</p>
+      <button onClick={getRandomQuote}>New Quote</button>
+      <button onClick={copyQuote} style={{ marginLeft: '10px' }}>Copy Quote</button>
     </div>
   );
 }
