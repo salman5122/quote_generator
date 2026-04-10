@@ -3,7 +3,31 @@ const quotes = [
   "Don’t let yesterday take up too much of today.",
   "It’s not whether you get knocked down, it’s whether you get up.",
   "If you are working on something exciting, it will keep you motivated.",
-  "Success doesn’t just find you. You have to go out and get it."
+  "Success doesn’t just find you. You have to go out and get it.",
+  "The harder you work for something, the greater you’ll feel when you achieve it.",
+  "Dream bigger. Do bigger.",
+  "Don’t stop when you’re tired. Stop when you’re done.",
+  "Wake up with determination. Go to bed with satisfaction.",
+  "Do something today that your future self will thank you for.",
+  "Little things make big days.",
+  "It’s going to be hard, but hard does not mean impossible.",
+  "Don’t wait for opportunity. Create it.",
+  "Sometimes we’re tested not to show our weaknesses, but to discover our strengths.",
+  "The key to success is to focus on goals, not obstacles.",
+  "Dream it. Believe it. Build it.",
+  "Your only limit is your mind.",
+  "Push yourself, because no one else is going to do it for you.",
+  "Great things never come from comfort zones.",
+  "Work hard in silence, let your success be your noise.",
+  "Success is what happens after you have survived all of your mistakes.",
+  "Be so good they can’t ignore you.",
+  "Stay hungry. Stay foolish.",
+  "Focus on being productive instead of busy.",
+  "The secret of getting ahead is getting started.",
+  "It always seems impossible until it’s done.",
+  "Quality is not an act, it is a habit.",
+  "The way to get started is to quit talking and begin doing.",
+  "Hardships often prepare ordinary people for an extraordinary destiny.",
+  "Believe you can and you're halfway there."
 ];
-
 export default quotes;
