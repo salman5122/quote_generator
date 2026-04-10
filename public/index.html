@@ -1,43 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <title>QuoteGen Pro | 2026 SaaS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Light Mode Variables */
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --accent: #6366f1;
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+        [data-theme='dark'] {
+            /* Dark Mode Variables */
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #818cf8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        /* SaaS Bento Card */
+        .app-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: var(--shadow);
+            position: relative;
+            text-align: center;
+        }
+
+        /* Floating Theme Toggle */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            padding: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .quote-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        #quote-text {
+            font-size: 1.75rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        #quote-author {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            display: block;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass-border);
+        }
+
+        /* Simple animation for new quotes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <button class="theme-toggle" id="theme-btn" title="Toggle Theme">
+            <span id="theme-icon">🌙</span>
+        </button>
+
+        <div class="quote-header">Inspiration Engine</div>
+        
+        <div id="quote-box">
+            <h1 id="quote-text">"The best way to predict the future is to create it."</h1>
+            <span id="quote-author">— Peter Drucker</span>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="generateQuote()">New Quote</button>
+            <button class="btn btn-secondary" onclick="copyQuote()">Copy</button>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
+            { text: "Move fast and break things.", author: "Mark Zuckerberg" },
+            { text: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs" },
+            { text: "Innovation distinguishes between a leader and a follower.", author: "Steve Jobs" },
+            { text: "Design is not just what it looks like and feels like. Design is how it works.", author: "Steve Jobs" }
+        ];
+
+        // Dark Mode Logic
+        const themeBtn = document.getElementById('theme-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        let isDark = true;
+
+        themeBtn.addEventListener('click', () => {
+            isDark = !isDark;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            themeIcon.innerText = isDark ? '🌙' : '☀️';
+        });
+
+        // Quote Logic
+        function generateQuote() {
+            const quoteBox = document.getElementById('quote-box');
+            const textElem = document.getElementById('quote-text');
+            const authorElem = document.getElementById('quote-author');
+            
+            // Add animation class
+            quoteBox.classList.remove('fade-in');
+            void quoteBox.offsetWidth; // Trigger reflow
+            quoteBox.classList.add('fade-in');
+
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const randomQuote = quotes[randomIndex];
+
+            textElem.innerText = `"${randomQuote.text}"`;
+            authorElem.innerText = `— ${randomQuote.author}`;
+        }
+
+        function copyQuote() {
+            const text = document.getElementById('quote-text').innerText;
+            const author = document.getElementById('quote-author').innerText;
+            navigator.clipboard.writeText(`${text} ${author}`);
+            alert('Quote copied to clipboard!');
+        }
+
+        // Initialize with dark theme
+        document.documentElement.setAttribute('data-theme', 'dark');
+    </script>
+</body>
 </html>
